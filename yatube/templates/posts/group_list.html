@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+<title>
+  {% block title %}{{ title }}{% endblock %}
+</title>
+{% block content %}  
+<h1>{{ title }}</h1>
+<p>{{ description }}</p>
+{% for post in page_obj %}
+
+<article>
+  <ul>
+    <li>
+      Автор: {{ post.author.get_full_name }}
+    </li>
+    <li>
+      Дата публикации: {{ post.pub_date|date:"d E Y" }}
+    </li>
+  </ul>      
+  <p>
+    {{ post.text }}
+  </p>         
+</article>
+<hr>
+{% endfor %}
+{% if not forloop.last %}<hr>{% endif %}
+{% include "posts/includes/paginator.html" %}
+{% endblock %}
