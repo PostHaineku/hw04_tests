@@ -84,14 +84,10 @@ def post_edit(request, post_id):
         "id": post_id,
     }
     if post.author != request.user:
-        print('автор не автор')
         return redirect("posts:post_detail", post_id=post_id)
     if request.method == "POST":
         if form.is_valid():
             form.save()
-            print('сохранилось в бд')
             return redirect("posts:post_detail", post_id=post_id)
-        print('форма не валидна')
         return render(request, "posts/create_post.html", context)
-    print('get запрос')
     return render(request, "posts/create_post.html", context)
