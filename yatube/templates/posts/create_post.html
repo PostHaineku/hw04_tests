@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 {% extends "base.html" %}
+{% load thumbnail %}
 <title>
   {% block title %}Новая запись{% endblock %}
 </title>
@@ -13,7 +13,7 @@
         </div>
         <div class="card-body">
           {% if is_edit %}
-          <form method="post" action="{% url "posts:post_edit" id %}">
+          <form method="post" action="{% url "posts:post_edit" id %}" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group row my-3 p-3">
               <label for="id_text">
@@ -44,7 +44,7 @@
             </div>
           </form>
           {% else %}
-          <form method="post" action="{% url "posts:post_create" %}">
+          <form method="post" action="{% url "posts:post_create" %}" enctype="multipart/form-data">
             {% csrf_token %}         
             <div class="form-group row my-3 p-3">
               <label for="id_text">
